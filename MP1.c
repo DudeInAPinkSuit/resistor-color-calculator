@@ -13,7 +13,6 @@ NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 
 #define SRESET    "\e[0m"
 #define SBOLD     "\e[39;49;1m"
-
 #define SNORMAL   "\e[39;49m"
 #define SBLACK    "\e[1;38;5;16m"
 #define SBROWN    "\e[1;38;5;130m"
@@ -23,10 +22,10 @@ NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 #define SGREEN    "\e[1;38;5;46m"
 #define SBLUE     "\e[1;38;5;21m"
 #define SVIOLET   "\e[1;38;5;93m"
-#define SGRAY     "\e[1;38;5;246m"
+#define SGRAY     "\e[1;38;5;102m"
 #define SWHITE    "\e[1;38;5;255m"
 #define SGOLD     "\e[1;38;5;178m"
-#define SSILVER   "\e[1;38;5;102m"
+#define SSILVER   "\e[1;38;5;246m"
 
 void welcomeLine(){
 
@@ -53,19 +52,91 @@ void welcomeLine(){
     printf("%s%10s%s%16s\n", SGOLD, "gold", SRESET, "D or d");
     printf("%s%11s%s%15s\n", SSILVER, "silver", SRESET, "S or s");
     printf("%11s%15s\n\n", "No Band", "Z or z");
+
+}
+
+void askMode(int *pFormat){
+
+    do
+    {
+        printf("What type of mode: Per-line? [0] or One-liner? [1]\t");
+        scanf("%d",pFormat);
+
+    if (*pFormat != 0 && *pFormat != 1)
+    {
+        printf("Invalid input. Please enter 0 or 1. \n");
+    }
+
+    } while (*pFormat != 0 && *pFormat != 1);
     
 }
 
+void oneLineInput(char *cBand1, char *cBand2, 
+                  char *cBand3, char *cBand4, 
+                  char *cBand5, char *cBand6)
+{
+    printf("Enter the color bands; use commas as separators:\n");
+    scanf(" %c,%c,%c,%c,%c,%c", 
+            cBand1, cBand2, 
+            cBand3, cBand4, 
+            cBand5, cBand6);
 
+    printf("Entered bands: %c,%c,%c,%c,%c,%c\n", 
+                            *cBand1, *cBand2, 
+                            *cBand3, *cBand4, 
+                            *cBand5, *cBand6);
+}
+
+void perLineInput(char *cBand1, char *cBand2, 
+                  char *cBand3, char *cBand4, 
+                  char *cBand5, char *cBand6)
+{
+
+    printf("Enter the color bands\n");
+    printf("1st band: ");
+    scanf(" %c", cBand1);
+    printf("2nd band: ");
+    scanf(" %c", cBand2);
+    printf("3rd band: ");
+    scanf(" %c", cBand3);
+    printf("4th band: ");
+    scanf(" %c", cBand4);
+    printf("5th band: ");
+    scanf(" %c", cBand5);
+    printf("6th band: ");
+    scanf(" %c", cBand6);
+
+    printf("Entered bands: %c,%c,%c,%c,%c,%c", 
+                        *cBand1, *cBand2, 
+                        *cBand3, *cBand4, 
+                        *cBand5, *cBand6);
+}
 
 int main(){
 
+    char cBand1, cBand2, 
+         cBand3, cBand4, 
+         cBand5, cBand6;
+
+    int nFormat;
+
     welcomeLine();
 
-   
+    askMode(&nFormat);
 
-
-
-
+    if(nFormat == 0)
+    {
+        perLineInput(&cBand1, &cBand2, 
+                     &cBand3, &cBand4, 
+                     &cBand5, &cBand6);
+        
+    }
+    else if (nFormat == 1)
+    {
+        oneLineInput(&cBand1, &cBand2, 
+                     &cBand3, &cBand4, 
+                     &cBand5, &cBand6);
+    }
+    
     return 0;
 }

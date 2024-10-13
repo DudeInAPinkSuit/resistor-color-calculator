@@ -13,78 +13,144 @@ NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 
 #define SRESET    "\e[0m"
 #define SBOLD     "\e[39;49;1m"
-#define SNORMAL   "\e[39;49m"
-#define SBLACK    "\e[1;38;5;16m"
-#define SBROWN    "\e[1;38;5;130m"
-#define SRED      "\e[1;38;5;196m"
-#define SORANGE   "\e[1;38;5;208m"
-#define SYELLOW   "\e[1;38;5;226m"
-#define SGREEN    "\e[1;38;5;46m"
-#define SBLUE     "\e[1;38;5;21m"
-#define SVIOLET   "\e[1;38;5;93m"
-#define SGRAY     "\e[1;38;5;102m"
-#define SWHITE    "\e[1;38;5;255m"
-#define SGOLD     "\e[1;38;5;178m"
-#define SSILVER   "\e[1;38;5;246m"
+#define SBLACK    "\e[1;38;5;16mblack\e[39;0m"
+#define SBROWN    "\e[1;38;5;130mbrown\e[39;0m"
+#define SRED      "\e[1;38;5;196mred\e[39;0m"
+#define SORANGE   "\e[1;38;5;208morange\e[39;0m"
+#define SYELLOW   "\e[1;38;5;226myellow\e[39;0m"
+#define SGREEN    "\e[1;38;5;46mgreen\e[39;0m"
+#define SBLUE     "\e[1;38;5;21mblue\e[39;0m"
+#define SVIOLET   "\e[1;38;5;93mviolet\e[39;0m"
+#define SGRAY     "\e[1;38;5;102mgray\e[39;0m"
+#define SWHITE    "\e[1;38;5;255mwhite\e[39;0m"
+#define SGOLD     "\e[1;38;5;178mgold\e[39;0m"
+#define SSILVER   "\e[1;38;5;246msilver\e[39;0m"
 
 void welcomeLine(){
 
     printf("%s _ _ _     _                   \n", SBOLD);
     printf("| | | |___| |___ ___ _____ ___ \n");
     printf("| | | | -_| |  _| . |     | -_|\n");
-    printf("|_____|___|_|___|___|_|_|_|___|%s\n", SNORMAL);
+    printf("|_____|___|_|___|___|_|_|_|___|%s\n", SRESET);
     printf("%18s\n", "To The");
     printf("%sResistor Color Code Calculator! %s \n\n", SBOLD, SRESET);
 
     printf("%19s\n", "Legend:");
     printf("%10s%20s\n","Color", "Key Assignment");
 
-    printf("%s%10s%s%16s\n", SBLACK, "black", SRESET, "B or b");
-    printf("%s%10s%s%16s\n", SBROWN, "brown", SRESET, "N or n");
-    printf("%s%9s%s%17s\n", SRED, "red", SRESET, "R or r");
-    printf("%s%11s%s%15s\n", SORANGE, "orange", SRESET, "O or o");
-    printf("%s%11s%s%15s\n", SYELLOW, "yellow", SRESET, "Y or y");
-    printf("%s%10s%s%16s\n", SGREEN, "green", SRESET, "G or g");
-    printf("%s%10s%s%16s\n", SBLUE, "blue", SRESET, "E or e");
-    printf("%s%11s%s%15s\n", SVIOLET, "violet", SRESET, "V or v");
-    printf("%s%10s%s%16s\n", SGRAY, "gray", SRESET, "A or a");
-    printf("%s%10s%s%16s\n", SWHITE, "white", SRESET, "W or w");
-    printf("%s%10s%s%16s\n", SGOLD, "gold", SRESET, "D or d");
-    printf("%s%11s%s%15s\n", SSILVER, "silver", SRESET, "S or s");
+    printf("%29s%16s\n", SBLACK, "B or b");
+    printf("%30s%16s\n", SBROWN, "N or n");
+    printf("%29s%17s\n", SRED,  "R or r");
+    printf("%31s%15s\n", SORANGE,  "O or o");
+    printf("%31s%15s\n", SYELLOW,  "Y or y");
+    printf("%29s%16s\n", SGREEN,  "G or g");
+    printf("%29s%16s\n", SBLUE,  "E or e");
+    printf("%30s%15s\n", SVIOLET,  "V or v");
+    printf("%30s%16s\n", SGRAY,  "A or a");
+    printf("%30s%16s\n", SWHITE,  "W or w");
+    printf("%30s%16s\n", SGOLD,  "D or d");
+    printf("%31s%15s\n", SSILVER,  "S or s");
     printf("%11s%15s\n\n", "No Band", "Z or z");
 
 }
 
-void askMode(int *pFormat){
+void askMode(char *pFormat){
 
     do
     {
-        printf("What type of mode: Per-line? [0] or One-liner? [1]\t");
-        scanf("%d",pFormat);
+        printf("Per-line mode [0] or One-liner mode [1]\t: ");
+        scanf(" %c",pFormat);
 
-    if (*pFormat != 0 && *pFormat != 1)
+    if (*pFormat != '0' && *pFormat != '1')
     {
         printf("Invalid input. Please enter 0 or 1. \n");
     }
 
-    } while (*pFormat != 0 && *pFormat != 1);
+    } while (*pFormat != '0' && *pFormat != '1');
     
+}
+
+
+void enteredBands(char *cBand1, char *cBand2, 
+                  char *cBand3, char *cBand4, 
+                  char *cBand5, char *cBand6)
+{
+
+    printf("Entered bands: ");
+
+    char* pBand = cBand1;
+
+    for(int i = 0; i <= 5; i++){
+
+        switch (*pBand)
+        {
+        case 'B': case 'b':
+            printf("%s", SBLACK);
+            break;
+        case 'N': case 'n':
+            printf("%s", SBROWN);
+            break;
+        case 'R': case 'r':
+            printf("%s", SRED);
+            break;
+        case 'O': case 'o':
+            printf("%s", SORANGE);
+            break;
+        case 'Y': case 'y':
+            printf("%s", SYELLOW);
+            break;
+        case 'G': case 'g':
+            printf("%s", SGREEN);
+            break;
+        case 'E': case 'e':
+            printf("%s", SBLUE);
+            break;
+        case 'V': case 'v':
+            printf("%s", SVIOLET);
+            break;
+        case 'A': case 'a':
+            printf("%s", SGRAY);
+            break;
+        case 'W': case 'w':
+            printf("%s", SWHITE);
+            break;
+        case 'D': case 'd':
+            printf("%s", SGOLD);
+            break;
+        case 'S': case 's':
+            printf("%s", SSILVER);
+            break;
+        case 'Z': case 'z':
+            printf("No Band");
+            break;
+        default:
+            printf("Invalid");
+            break;
+        }
+        if (i != 5){
+             printf(", ");
+        }
+
+        pBand--;
+    }
+
 }
 
 void oneLineInput(char *cBand1, char *cBand2, 
                   char *cBand3, char *cBand4, 
                   char *cBand5, char *cBand6)
 {
-    printf("Enter the color bands; use commas as separators:\n");
+    printf("Enter the 6 color bands; use commas as separators:\n");
     scanf(" %c,%c,%c,%c,%c,%c", 
             cBand1, cBand2, 
             cBand3, cBand4, 
             cBand5, cBand6);
 
-    printf("Entered bands: %c,%c,%c,%c,%c,%c\n", 
-                            *cBand1, *cBand2, 
-                            *cBand3, *cBand4, 
-                            *cBand5, *cBand6);
+    enteredBands(cBand1, cBand2, 
+                 cBand3, cBand4, 
+                 cBand5, cBand6);
+
+
 }
 
 void perLineInput(char *cBand1, char *cBand2, 
@@ -106,10 +172,9 @@ void perLineInput(char *cBand1, char *cBand2,
     printf("6th band: ");
     scanf(" %c", cBand6);
 
-    printf("Entered bands: %c,%c,%c,%c,%c,%c", 
-                        *cBand1, *cBand2, 
-                        *cBand3, *cBand4, 
-                        *cBand5, *cBand6);
+    enteredBands(cBand1, cBand2, 
+                 cBand3, cBand4, 
+                 cBand5, cBand6);
 }
 
 int main(){
@@ -118,20 +183,19 @@ int main(){
          cBand3, cBand4, 
          cBand5, cBand6;
 
-    int nFormat;
+    char cFormat;
 
     welcomeLine();
 
-    askMode(&nFormat);
+    askMode(&cFormat);
 
-    if(nFormat == 0)
+    if(cFormat == '0')
     {
         perLineInput(&cBand1, &cBand2, 
                      &cBand3, &cBand4, 
                      &cBand5, &cBand6);
-        
     }
-    else if (nFormat == 1)
+    else if (cFormat == '1')
     {
         oneLineInput(&cBand1, &cBand2, 
                      &cBand3, &cBand4, 
@@ -140,3 +204,4 @@ int main(){
     
     return 0;
 }
+

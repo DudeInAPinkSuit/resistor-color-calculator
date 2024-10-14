@@ -9,6 +9,14 @@ and/or persons.
 NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 ******************************************************************/
 
+/*
+    Description: Resistor Color Band Calculator
+    Programmed by: NONO, Alec Marx Gabriel Belen S27B
+    Last modified: October 14, 2024
+    Version: 1.5
+    Acknowledgements: Stack Overflow,  W3Schools, YouTube (Low Level)
+*/
+
 #include <stdio.h>
 
 // constants for colored text
@@ -30,6 +38,10 @@ NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 #define SGOLD     "\e[1;38;5;178mgold\e[39;0m"
 #define SSILVER   "\e[1;38;5;246msilver\e[39;0m"
 
+/* 
+    Starting function; displays Welcome text and legend
+    Precondition: No Preconditions 
+*/
 void welcomeLine()
 {
 
@@ -84,7 +96,7 @@ void enteredBands(int *nValid, char *pBand1, char *pBand2,
 
     for(int i = 0; i <= 5; i++){
 
-        switch (*pBand)
+        switch (*(pBand-i))
         {
         case 'B': case 'b':
             printf("%s", SBLACK);
@@ -132,7 +144,6 @@ void enteredBands(int *nValid, char *pBand1, char *pBand2,
         }
         (i == 5) ? printf("\n") : printf(", ");
         
-        pBand--;
     }
 }
 
@@ -176,17 +187,20 @@ void perLineInput(int *nValid, char *pBand1, char *pBand2,
 
 int compute1stDigits(char *pBand1, int *pValid, int nDigits)
 {
-    
+    // individual digits; set as 0 to avoid uninitalized variables
     int nDigit3 = 0;
     int nDigit2 = 0;
     int nDigit1 = 0;
 
+    // pointers as anchor/starting point for iterating through memory addresses
     int *pDigit = &nDigit1;
     char *pBand = pBand1;
 
+    // loops through all of the digits
     for(int i = 0; i < nDigits; i++){
 
-        switch (*pBand)
+        // determines digit value based on character stored in band variable
+        switch (*(pBand-i))
         {
         case 'B': case 'b':
             *pDigit = 0;
@@ -218,6 +232,7 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
         case 'W': case 'w':
             *pDigit = 9;
             break;
+        // An invalid character has been entered; changes failsafe (*pValid) to 0
         default:
             *pValid = 0;
             if(i == 1){
@@ -226,22 +241,22 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
             break;
         }
 
-        // adds 1 to the memory address to iterate to the next variable
+        // adds 1 to the memory address to iterate to the next digit variable
         pDigit++;
-
-        // subtracts 1 to the memory address to iterate to the next variable
-        pBand--;
 
     }
 
+    // returns total value of first 2 significant digits
     if(nDigits == 2)
     {
         return (nDigit1 * 10) + (nDigit2);
     }
+    // returns total value of first 3 significant digits
     else if(nDigits == 3)
     {
         return (nDigit1 * 100) + (nDigit2 * 10) + (nDigit3);
     }
+    // returns 0 to avoid errors
     else
     {
         return 0;
@@ -250,8 +265,10 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
 
 float computeResistorVal(int nDigit123, char *pBand)
 {
+    // initialize multiplier variable
     float fMultiplier;
 
+    // determines multiplier based on character stored in band variable
     switch (*pBand)
         {
         case 'B': case 'b':
@@ -281,18 +298,23 @@ float computeResistorVal(int nDigit123, char *pBand)
         case 'S': case 's':
             fMultiplier = 0.01;
             break;
+        // returns 0 if invalid
         default:
             fMultiplier = 0;
             break;
 
     }
 
+    /*
+        returns significant digits times multiplier;
+        turning scientific notation to decimal form
+    */
     return nDigit123 * fMultiplier;
 }
 
 float computeTolerance(char *pBand)
 {
-
+    // returns tolerance value based on character in band variable
     switch (*pBand)
         {
         case 'N': case 'n':
@@ -316,14 +338,17 @@ float computeTolerance(char *pBand)
         case 'S': case 's':
             return 0.10; 
             break;
+        // returns 0 if invalid
         default:    
             return 0;
             break;
         }
 }
 
-int computeTempCoefficient(char *pBand){
+int computeTempCoefficient(char *pBand)
+{
 
+    // returns temperature coefficient based on character in band variable
     switch (*pBand)
         {
         case 'B': case 'b':
@@ -353,6 +378,7 @@ int computeTempCoefficient(char *pBand){
         case 'A': case 'a':
             return 1; 
             break;
+        // returns 0 if invalid
         default:
             return 0;
             break;
@@ -371,18 +397,21 @@ float rangeUpperBound(float fResistorVal, float fTolerance)
 
 void output(float fResistorVal, int nDigit123, float fTolerance)
 {
+    // if statement for checking valid resistance value
     if(fResistorVal == 0)
     {
         printf("Invalid Multiplier Band!\n");
     }
     else
     {  
+        // if statement for checking valid tolerance value
         if(fTolerance == 0)
         {
             printf("Invalid Tolerance Value\n");
         }
         else
         {
+            // prints resistor value 
             printf("Resistor Value is %s%.2f%s ohms with a tolerance of %s%.2f%%%s\n", 
                     SWHITEBOLD,
                     fResistorVal,
@@ -397,8 +426,10 @@ void output(float fResistorVal, int nDigit123, float fTolerance)
                     SWHITEBOLD,
                     rangeUpperBound(fResistorVal, fTolerance),
                     SRESET);
+            // checks for resistors higher than 1 million ohms
             if(fResistorVal > 1000000)
             {
+                //prints warning
                 printf("%sWarning! This value is above 100 Mega-ohms. No Practical Application! %s\n",
                         SREDBOLD,
                         SRESET);
@@ -407,7 +438,8 @@ void output(float fResistorVal, int nDigit123, float fTolerance)
     }
 }
 
-void sixBandOutput(int nTempCoefficient){
+void sixBandOutput(int nTempCoefficient)
+{
 
     if (nTempCoefficient == 0)
     {

@@ -457,23 +457,25 @@ void sixBandOutput(int nTempCoefficient)
 
 int main()
 {
-
+    // initializes variables for storing characters with corresponding bands
     char cBand1, cBand2, 
          cBand3, cBand4, 
          cBand5, cBand6;
 
-    int nDigit123;
-    float fResistorVal;
-    float fTolerance;
-    int nTempCoefficient = 0;
+    int nDigit123; // stores the significant digits of the resistance
+    float fResistorVal; // stores final stores resistance value
+    float fTolerance; // stores tolerance
+    int nTempCoefficient = 0; // stores temperature coefficient; 0 by default
 
-    char cFormat;
-    int nValid = 1;
+    char cFormat; // stores either 1 or 0; for the format of user input
+    int nValid = 1; // stores either 1 or 0; checks the validity of the program flow
 
-    welcomeLine();
+    welcomeLine(); // shows welcome text
 
-    askMode(&cFormat);
+    askMode(&cFormat); // asks for input mode
 
+
+    // executes the corresponding input mode 
     if(cFormat == '0')
     {
         perLineInput(&nValid, &cBand1, &cBand2, 
@@ -487,6 +489,7 @@ int main()
                      &cBand5, &cBand6);
     }
 
+    
     if(nValid == 0)
     {
         printf("Please use a valid input");

@@ -1,12 +1,10 @@
 <h1 id="title">Resistor Color Code Calculator</h1>
 
 <p id="description">This is a Machine Project in fulfillment of Logic Formulation and Introductory Programming (CCPROG1) in De La Salle University</p>
-  
-
 
 <h2>🧐 Features</h2>
 
-Here're some of the project's best features:
+Here are some of the project's best features:
 
 -   One-liner mode
 -   Per-line mode
@@ -29,5 +27,3 @@ Here're some of the project's best features:
 ```
 .\MP1.exe
 ```
-
-<h2>💻 Built with</h2>

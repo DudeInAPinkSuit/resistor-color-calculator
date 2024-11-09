@@ -64,7 +64,7 @@ void askMode(char *pFormat)
     do
     {
         printf("Per-line mode [0] or One-liner mode [1]\t: ");
-        scanf(" %c",pFormat);
+        scanf(" %c%*[^\n]",pFormat);
 
         if (*pFormat != '0' && *pFormat != '1')
         {
@@ -457,8 +457,7 @@ int main()
                      &cBand3, &cBand4, 
                      &cBand5, &cBand6);
     }
-
-    
+ 
     if(nValid == 0)
     {
         printf("Please use a valid input");

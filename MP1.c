@@ -157,17 +157,17 @@ void perLineInput(int *nValid, char *pBand1, char *pBand2,
 {
     printf("Enter the color bands\n");
     printf("1st band: ");
-    scanf(" %c", pBand1);
+    scanf(" %c%*[^\n]", pBand1);
     printf("2nd band: ");
-    scanf(" %c", pBand2);
+    scanf(" %c%*[^\n]", pBand2);
     printf("3rd band: ");
-    scanf(" %c", pBand3);
+    scanf(" %c%*[^\n]", pBand3);
     printf("4th band: ");
-    scanf(" %c", pBand4);
+    scanf(" %c%*[^\n]", pBand4);
     printf("5th band: ");
-    scanf(" %c", pBand5);
+    scanf(" %c%*[^\n]", pBand5);
     printf("6th band: ");
-    scanf(" %c", pBand6);
+    scanf(" %c%*[^\n]", pBand6);
 
     enteredBands(nValid, pBand1, pBand2, 
                  pBand3, pBand4, 

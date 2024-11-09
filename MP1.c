@@ -466,7 +466,7 @@ int main()
  
     if(nValid == 0)
     {
-        printf("Please use a valid input");
+        printf("%sPlease use a valid input%s", SREDBOLD, SRESET);
     }
     else
     {

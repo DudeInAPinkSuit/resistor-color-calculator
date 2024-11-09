@@ -68,7 +68,7 @@ void askMode(char *pFormat)
 
         if (*pFormat != '0' && *pFormat != '1')
         {
-            printf("Invalid input. Please enter 0 or 1. \n");
+            printf("%sInvalid input. Please enter 0 or 1.%s \n", SREDBOLD, SRESET);
         }
 
     } while (*pFormat != '0' && *pFormat != '1');
@@ -221,7 +221,7 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
         default:
             *pValid = 0;
             if(i == 1){
-                printf("Invalid input for 1st, 2nd or 3rd digit!\n");    
+                printf("%sInvalid input for 1st, 2nd or 3rd digit!%s\n", SREDBOLD, SRESET);    
             }  
             break;
         }
@@ -371,48 +371,53 @@ float rangeUpperBound(float fResistorVal, float fTolerance)
 
 void output(float fResistorVal, int nDigit123, float fTolerance)
 {
-    if(fResistorVal == 0)
-    {
-        printf("Invalid Multiplier Band!\n");
-    }
-    else
-    {  
-        if(fTolerance == 0)
-        {
-            printf("Invalid Tolerance Value\n");
-        }
-        else
-        {
-            printf("Resistor Value is %s%.2f%s ohms with a tolerance of %s%.2f%%%s\n", 
+
+    if((fTolerance != 0) && (fResistorVal != 0)){
+
+        printf("Resistor Value is %s%.2f%s ohms with a tolerance of %s%.2f%%%s\n", 
                     SWHITEBOLD,
                     fResistorVal,
                     SRESET,
                     SWHITEBOLD,
                     fTolerance*100,
                     SRESET);
-            printf("Resistance Range Value: %s%.2f%s ohms to %s%.2f%s ohms\n",
+                    
+        printf("Resistance Range Value: %s%.2f%s ohms to %s%.2f%s ohms\n",
                     SWHITEBOLD,
                     rangeLowerBound(fResistorVal, fTolerance),
                     SRESET, 
                     SWHITEBOLD,
                     rangeUpperBound(fResistorVal, fTolerance),
                     SRESET);
-            // Warning for resistors above 1000000 ohms
-            if(fResistorVal > 1000000)
-            {
-                printf("%sWarning! This value is above 100 Mega-ohms. No Practical Application! %s\n",
-                        SREDBOLD,
-                        SRESET);
-            }
-        }
+        // Warning for resistors above 1000000 ohms
+        if(fResistorVal > 1000000)
+        {
+            printf("%sWarning! This value is above 100 Mega-ohms. No Practical Application! %s\n",
+                    SREDBOLD,
+                    SRESET);
+        } 
+
     }
+    else if ((fTolerance == 0) && (fResistorVal == 0))
+    {
+        printf("%sInvalid Multiplier and Tolerance Band!%s\n", SREDBOLD, SRESET); 
+    }
+    else if (fResistorVal == 0)
+    {
+        printf("%sInvalid Multiplier Band!%s\n", SREDBOLD, SRESET);
+    }
+    else
+    {
+        printf("%sAn error has occurred%s", SREDBOLD, SRESET);
+    }
+     
 }
 
 void sixBandOutput(int nTempCoefficient){
 
-    if (nTempCoefficient == 0)
+    if ((nTempCoefficient == 0))
     {
-        printf("Invalid Temperature Coefficient Value\n");
+        printf("%sInvalid Temperature Coefficient Value%s\n", SREDBOLD, SRESET);
     }
     else
     {
@@ -426,6 +431,7 @@ void sixBandOutput(int nTempCoefficient){
 
 int main()
 {
+    
     // initializes variables for storing characters with corresponding bands
     char cBand1, cBand2, 
          cBand3, cBand4, 

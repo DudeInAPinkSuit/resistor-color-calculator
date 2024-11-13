@@ -9,6 +9,14 @@ and/or persons.
 NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 ******************************************************************/
 
+/*
+    Description:  Resistor Color Calculator
+    Programmed by: Nono, Alec Marx Gabriel B. 
+    Last modified: <date when last revision was made>
+    Version: <version number>
+    [Acknowledgements: Stack Overflow, w3schools, YouTube]
+*/
+
 #include <stdio.h>
 
 // constants for colored text
@@ -29,6 +37,11 @@ NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
 #define SWHITE    "\e[1;38;5;255mwhite\e[39;0m"
 #define SGOLD     "\e[1;38;5;178mgold\e[39;0m"
 #define SSILVER   "\e[1;38;5;246msilver\e[39;0m"
+
+/* 
+    Welcome lines with proper formatting; shows Key Legend
+    Precondition: Program has just started
+*/
 
 void welcomeLine()
 {
@@ -58,7 +71,11 @@ void welcomeLine()
     printf("%11s%15s\n\n", "No Band", "Z or z");
 
 }
-
+/* 
+    Asks the format of user input
+    Precondition: welcomeLine() has already been called
+    @param pFormat is used to store the state of the chosen mode
+*/
 void askMode(char *pFormat)
 {
     do

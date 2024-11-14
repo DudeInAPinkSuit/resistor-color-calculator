@@ -91,6 +91,18 @@ void askMode(char *pFormat)
     } while (*pFormat != '0' && *pFormat != '1');
 }
 
+/* 
+    Prints the user-entered bands
+    Precondition: the characters used to represent the bands have been entered by the user
+    @param nValid used to store the state of the validity of user input
+    @param pBand1 used to check the band within the variable
+    @param pBand2 used to check the band within the variable
+    @param pBand3 used to check the band within the variable
+    @param pBand4 used to check the band within the variable
+    @param pBand5 used to check the band within the variable
+    @param pBand6 used to check the band within the variable
+*/
+
 void enteredBands(int *nValid, char *pBand1, char *pBand2, 
                   char *pBand3, char *pBand4, 
                   char *pBand5, char *pBand6)
@@ -152,7 +164,17 @@ void enteredBands(int *nValid, char *pBand1, char *pBand2,
         pBand--;
     }
 }
-
+/* 
+    Acquires the bands given through user input within a single line separated by commas
+    Precondition: askMode() loop has already been exited
+    @param nValid used to store the state of the validity of user input
+    @param pBand1 used to store the inputted character by the user
+    @param pBand2 used to store the inputted character by the user
+    @param pBand3 used to store the inputted character by the user
+    @param pBand4 used to store the inputted character by the user
+    @param pBand5 used to store the inputted character by the user
+    @param pBand6 used to store the inputted character by the user
+*/
 void oneLineInput(int *nValid, char *pBand1, char *pBand2, 
                   char *pBand3, char *pBand4, 
                   char *pBand5, char *pBand6)
@@ -167,7 +189,17 @@ void oneLineInput(int *nValid, char *pBand1, char *pBand2,
                  pBand3, pBand4, 
                  pBand5, pBand6);
 }
-
+/* 
+    Acquires the bands given through user input one by one
+    Precondition: askMode() loop has already been exited
+    @param nValid used to store the state of the validity of user input
+    @param pBand1 used to store the inputted character by the user
+    @param pBand2 used to store the inputted character by the user
+    @param pBand3 used to store the inputted character by the user
+    @param pBand4 used to store the inputted character by the user
+    @param pBand5 used to store the inputted character by the user
+    @param pBand6 used to store the inputted character by the user
+*/
 void perLineInput(int *nValid, char *pBand1, char *pBand2, 
                   char *pBand3, char *pBand4, 
                   char *pBand5, char *pBand6)

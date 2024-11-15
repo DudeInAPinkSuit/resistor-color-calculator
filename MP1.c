@@ -131,13 +131,13 @@ void enteredBands(int *nValid, char *pBand1, char *pBand2,
             printf("%s", SYELLOW);
             break;
         case 'G': case 'g':
-            printf("%s", SGREEN);           
+            printf("%s", SGREEN);
             break;
         case 'E': case 'e':
-            printf("%s", SBLUE);        
+            printf("%s", SBLUE);
             break;
         case 'V': case 'v':
-            printf("%s", SVIOLET);       
+            printf("%s", SVIOLET);
             break;
         case 'A': case 'a':
             printf("%s", SGRAY);    
@@ -222,7 +222,13 @@ void perLineInput(int *nValid, char *pBand1, char *pBand2,
                  pBand3, pBand4, 
                  pBand5, pBand6);
 }
-
+/* 
+    Computes for the significant digits of the resistance
+    Precondition: Either perLineInput() or oneLineInput() have been called
+    @param pValid used to store the state of the validity of user input
+    @param pBand1 used to store the inputted character by the user
+    @param nDigits identifies the number of significant digits in a specific resistor
+*/
 int compute1stDigits(char *pBand1, int *pValid, int nDigits)
 {
     
@@ -271,7 +277,7 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
             *pValid = 0;
             if(i == 1){
                 printf("%sInvalid input for 1st, 2nd or 3rd digit!%s\n", SREDBOLD, SRESET);    
-            }  
+            }
             break;
         }
 
@@ -319,10 +325,10 @@ float computeResistorVal(int nDigit123, char *pBand)
             fMultiplier = 10000;
             break;
         case 'G': case 'g':
-            fMultiplier = 100000;           
+            fMultiplier = 100000;
             break;
         case 'E': case 'e':
-            fMultiplier = 1000000;        
+            fMultiplier = 1000000;
             break;
         case 'D': case 'd':
             fMultiplier = 0.1;
@@ -351,7 +357,7 @@ float computeTolerance(char *pBand)
             return 0.02;
             break;
         case 'G': case 'g':
-            return 0.005;      
+            return 0.005;
             break;
         case 'E': case 'e':
             return 0.0025; 

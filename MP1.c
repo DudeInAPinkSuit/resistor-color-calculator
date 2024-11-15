@@ -191,7 +191,7 @@ void oneLineInput(int *nValid, char *pBand1, char *pBand2,
 }
 /* 
     Acquires the bands given through user input one by one
-    Precondition: askMode() loop has already been exited
+    Precondition: askMode() loop has already been exited; input mode has been decided
     @param nValid used to store the state of the validity of user input
     @param pBand1 used to store the inputted character by the user
     @param pBand2 used to store the inputted character by the user
@@ -224,14 +224,18 @@ void perLineInput(int *nValid, char *pBand1, char *pBand2,
 }
 /* 
     Computes for the significant digits of the resistance
-    Precondition: Either perLineInput() or oneLineInput() have been called
+    Precondition: Either perLineInput() or oneLineInput()
+                  have been called
     @param pValid used to store the state of the validity of user input
     @param pBand1 used to store the inputted character by the user
-    @param nDigits identifies the number of significant digits in a specific resistor
+    @param nDigits identifies the number of significant 
+           digits in a specific resistor
+    @return the significant digits of the resistance value
+            is returned
 */
 int compute1stDigits(char *pBand1, int *pValid, int nDigits)
 {
-    
+
     int nDigit3 = 0;
     int nDigit2 = 0;
     int nDigit1 = 0;
@@ -303,6 +307,16 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
     }
 }
 
+/* 
+    Computes for the resistance value
+    Precondition: The significant digits of the resistance
+                  have been computed and stored in a
+                  variable in main()
+    @param nDigit123 used as the significant digits
+    @param pBand used to determine multiplier value
+    @return the complete resistance value is returned
+*/
+
 float computeResistorVal(int nDigit123, char *pBand)
 {
     float fMultiplier;
@@ -344,7 +358,14 @@ float computeResistorVal(int nDigit123, char *pBand)
 
     return nDigit123 * fMultiplier;
 }
-
+/* 
+    Computes for the resistor's tolerance
+    Precondition: 3rd or 4th variable contain a
+                  character corresponding to a band
+    @param pBand used to determine multiplier value
+           used to calculate
+    @return a tolerance value is returned
+*/
 float computeTolerance(char *pBand)
 {
 
@@ -360,10 +381,10 @@ float computeTolerance(char *pBand)
             return 0.005;
             break;
         case 'E': case 'e':
-            return 0.0025; 
+            return 0.0025;
             break;
         case 'V': case 'v':
-            return 0.0001;     
+            return 0.0001;
             break;
         case 'D': case 'd':
             return 0.05; 
@@ -397,13 +418,13 @@ int computeTempCoefficient(char *pBand){
             return 25; 
             break;
         case 'G': case 'g':
-            return 20;            
+            return 20;
             break;
         case 'E': case 'e':
-            return 10;         
+            return 10;
             break;
         case 'V': case 'v':
-            return 5;       
+            return 5;
             break;
         case 'A': case 'a':
             return 1; 
@@ -413,12 +434,28 @@ int computeTempCoefficient(char *pBand){
             break;
         }
 }
-
+/* 
+    Computes for the lower bound of the resistance
+    Precondition: resistance value and tolerance have
+                  been computed already
+    @param fResistorVal used as a baseline in calculating lower bound
+    @param fTolerance used to calculate the deviation in 
+           resistance accuracy
+    @return a lower bound value is returned
+*/
 float rangeLowerBound(float fResistorVal, float fTolerance)
 {
     return fResistorVal - (fResistorVal * fTolerance);
 }
-
+/* 
+    Computes for the upper bound of the resistance
+    Precondition: resistance value and tolerance have
+                  been computed already
+    @param fResistorVal used as a baseline in calculating upper bound
+    @param fTolerance used to calculate the deviation in 
+           resistance accuracy
+    @return an upper bound value is returned
+*/
 float rangeUpperBound(float fResistorVal, float fTolerance)
 {
     return fResistorVal + (fResistorVal * fTolerance);

@@ -13,7 +13,7 @@ NONO, Alec Marx Gabriel Belen , DLSU ID# 12413704
     Description:  Resistor Color Calculator
     Programmed by: Nono, Alec Marx Gabriel B.
     Last modified: November 18, 2024
-    Version: v1.14
+    Version: v1.16
     [Acknowledgements: Stack Overflow, w3schools, YouTube, GitHub]
 */
 
@@ -517,11 +517,9 @@ void output(float fResistorVal, float fTolerance, int *pValid)
 /*
     Prints temperature coefficient value for 6 band 
     Precondition: resistance value and tolerance have
-                  been computed already;
-                  rangeUpperBound() & rangeLowerBound
-                  have been declared
-    @param fResistorVal used to print out the value
-    @param fTolerance used to print out the value
+                  been computed and printed already;
+    @param nTempCoefficient used to print out the value
+                            and checks if value exists
 */
 void sixBandOutput(int nTempCoefficient)
 {
@@ -540,7 +538,7 @@ void sixBandOutput(int nTempCoefficient)
 
 int main()
 {
-    
+
     // initializes variables for storing characters with corresponding bands
     char cBand1, cBand2, 
          cBand3, cBand4, 
@@ -585,7 +583,7 @@ int main()
             fResistorVal = computeResistorVal(nDigit123, &cBand3);
             fTolerance = computeTolerance(&cBand4);
 
-            output(fResistorVal, fTolerance, *nValid);
+            output(fResistorVal, fTolerance, &nValid);
         }
         // flow if only 5 bands
         else if((cBand6 == 'Z') || (cBand6 == 'z')){
@@ -594,7 +592,7 @@ int main()
             fResistorVal = computeResistorVal(nDigit123, &cBand4);
             fTolerance = computeTolerance(&cBand5);
 
-            output(fResistorVal, fTolerance, *nValid);
+            output(fResistorVal, fTolerance, &nValid);
         }
         // flow if there are 6 bands
         else{
@@ -604,8 +602,9 @@ int main()
             fTolerance = computeTolerance(&cBand5);
             nTempCoefficient = computeTempCoefficient(&cBand6);
 
-            output(fResistorVal, fTolerance, *nValid);
-            sixBandOutput(nTempCoefficient);
+            output(fResistorVal, fTolerance, &nValid);
+            if(nValid)
+                sixBandOutput(nTempCoefficient);
         }
     }
 

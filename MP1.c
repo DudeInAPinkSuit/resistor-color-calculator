@@ -471,7 +471,7 @@ float rangeUpperBound(float fResistorVal, float fTolerance)
     @param fResistorVal used to print out the value
     @param fTolerance used to print out the value
 */
-void output(float fResistorVal, float fTolerance)
+void output(float fResistorVal, float fTolerance, int *pValid)
 {
 
     if((fTolerance != 0) && (fResistorVal != 0)){
@@ -496,21 +496,33 @@ void output(float fResistorVal, float fTolerance)
             printf("%sWarning! This value is above 100 Mega-ohms. No Practical Application! %s\n",
                     SREDBOLD,
                     SRESET);
+            *pValid = 0;
         } 
 
     }
     else if ((fTolerance == 0) && (fResistorVal == 0)){
         printf("%sInvalid Multiplier and Tolerance Band!%s\n", SREDBOLD, SRESET); 
+        *pValid = 0;
     }
     else if (fResistorVal == 0){
         printf("%sInvalid Multiplier Band!%s\n", SREDBOLD, SRESET);
+        *pValid = 0;
     }
     else{
         printf("%sAn error has occurred%s", SREDBOLD, SRESET);
+        *pValid = 0;
     }
 
 }
-
+/*
+    Prints temperature coefficient value for 6 band 
+    Precondition: resistance value and tolerance have
+                  been computed already;
+                  rangeUpperBound() & rangeLowerBound
+                  have been declared
+    @param fResistorVal used to print out the value
+    @param fTolerance used to print out the value
+*/
 void sixBandOutput(int nTempCoefficient)
 {
 
@@ -573,7 +585,7 @@ int main()
             fResistorVal = computeResistorVal(nDigit123, &cBand3);
             fTolerance = computeTolerance(&cBand4);
 
-            output(fResistorVal, fTolerance);
+            output(fResistorVal, fTolerance, *nValid);
         }
         // flow if only 5 bands
         else if((cBand6 == 'Z') || (cBand6 == 'z')){
@@ -582,7 +594,7 @@ int main()
             fResistorVal = computeResistorVal(nDigit123, &cBand4);
             fTolerance = computeTolerance(&cBand5);
 
-            output(fResistorVal, fTolerance);
+            output(fResistorVal, fTolerance, *nValid);
         }
         // flow if there are 6 bands
         else{
@@ -592,7 +604,7 @@ int main()
             fTolerance = computeTolerance(&cBand5);
             nTempCoefficient = computeTempCoefficient(&cBand6);
 
-            output(fResistorVal, fTolerance);
+            output(fResistorVal, fTolerance, *nValid);
             sixBandOutput(nTempCoefficient);
         }
     }

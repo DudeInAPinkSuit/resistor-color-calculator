@@ -470,6 +470,7 @@ float rangeUpperBound(float fResistorVal, float fTolerance)
                   have been declared
     @param fResistorVal used to print out the value
     @param fTolerance used to print out the value
+    @param pValid used to store the state of the validity of user input
 */
 void output(float fResistorVal, float fTolerance, int *pValid)
 {

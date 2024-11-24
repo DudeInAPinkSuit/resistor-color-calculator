@@ -398,7 +398,7 @@ float computeTolerance(char *pBand)
     @param pBand used to determine temperature
            coefficient value which is then 
            calculated
-    @return a tolerance value is returned
+    @return a temperature coefficient value is returned
 */
 int computeTempCoefficient(char *pBand)
 {

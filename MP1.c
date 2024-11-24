@@ -313,9 +313,9 @@ int compute1stDigits(char *pBand1, int *pValid, int nDigits)
     @return the complete resistance value is returned
 */
 
-float computeResistorVal(int nDigit123, char *pBand)
+double computeResistorVal(int nDigit123, char *pBand)
 {
-    float fMultiplier;
+    double fMultiplier;
 
     switch (*pBand){
         case 'B': case 'b':
@@ -361,7 +361,7 @@ float computeResistorVal(int nDigit123, char *pBand)
            which is then calculated
     @return a tolerance value is returned
 */
-float computeTolerance(char *pBand)
+double computeTolerance(char *pBand)
 {
 
     switch (*pBand){
@@ -445,7 +445,7 @@ int computeTempCoefficient(char *pBand)
            resistance accuracy
     @return a lower bound value is returned
 */
-float rangeLowerBound(float fResistorVal, float fTolerance)
+double rangeLowerBound(double fResistorVal, double fTolerance)
 {
     return fResistorVal - (fResistorVal * fTolerance);
 }
@@ -458,7 +458,7 @@ float rangeLowerBound(float fResistorVal, float fTolerance)
            resistance accuracy
     @return an upper bound value is returned
 */
-float rangeUpperBound(float fResistorVal, float fTolerance)
+double rangeUpperBound(double fResistorVal, double fTolerance)
 {
     return fResistorVal + (fResistorVal * fTolerance);
 }
@@ -472,7 +472,7 @@ float rangeUpperBound(float fResistorVal, float fTolerance)
     @param fTolerance used to print out the value
     @param pValid used to store the state of the validity of user input
 */
-void output(float fResistorVal, float fTolerance, int *pValid)
+void output(double fResistorVal, double fTolerance, int *pValid)
 {
 
     if((fTolerance != 0) && (fResistorVal != 0) && (*pValid)){
@@ -546,8 +546,8 @@ int main()
          cBand5, cBand6;
 
     int nDigit123; // stores the significant digits of the resistance
-    float fResistorVal; // stores final stores resistance value
-    float fTolerance; // stores tolerance
+    double fResistorVal; // stores final stores resistance value
+    double fTolerance; // stores tolerance
     int nTempCoefficient = 0; // stores temperature coefficient; 0 by default
 
     char cFormat; // stores either 1 or 0; for the format of user input

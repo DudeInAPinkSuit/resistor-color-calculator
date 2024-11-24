@@ -477,7 +477,7 @@ void output(double fResistorVal, double fTolerance, int *pValid)
 
     if((fTolerance != 0) && (fResistorVal != 0) && (*pValid)){
 
-        printf("Resistor Value is %s%.2f%s ohms with a tolerance of %s%.2f%%%s\n", 
+        printf("Resistor Value is %s%.2lf%s ohms with a tolerance of %s%.2f%%%s\n", 
                     SWHITEBOLD,
                     fResistorVal,
                     SRESET,

@@ -475,7 +475,7 @@ float rangeUpperBound(float fResistorVal, float fTolerance)
 void output(float fResistorVal, float fTolerance, int *pValid)
 {
 
-    if((fTolerance != 0) && (fResistorVal != 0)){
+    if((fTolerance != 0) && (fResistorVal != 0) && (*pValid)){
 
         printf("Resistor Value is %s%.2f%s ohms with a tolerance of %s%.2f%%%s\n", 
                     SWHITEBOLD,
